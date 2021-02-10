@@ -28,6 +28,8 @@ class Client
         "rateUpload",
         "downloadDir",
         "percentDone",
+        "isPrivate",
+        "uploadedEver"
     ];
 
     public function __construct($hostname = null, $port = null, $username = null, $password = null)
@@ -85,9 +87,9 @@ class Client
         return $this->add($filename, true);
     }
 
-    public function remove($id)
+    public function remove($id, $deleteLocalData = false)
     {
-        $response = $this->callApi('torrent-remove', ['ids' => [$id]]);
+        $response = $this->callApi('torrent-remove', ['ids' => [$id], 'delete-local-data' => $deleteLocalData]);
         return true;
     }
 
